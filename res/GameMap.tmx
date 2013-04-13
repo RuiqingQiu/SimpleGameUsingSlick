@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="24" height="16" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="spritesheet" tilewidth="32" tileheight="32">
+  <image source="spritesheet.png" width="192" height="192"/>
+ </tileset>
+ <tileset firstgid="37" name="skytileset" tilewidth="32" tileheight="32">
+  <image source="skytileset.png" width="32" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="24" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2TwQrCMBBEU1tMU7QRacBbq9j//0VHSHBYEtnaHD08kpTsZGfYrsaY9Y+aBhxACzraHyvpW9ADBwYwgQBOlfoeIx5cSH8SfrqNnmzsOQjNQH56wik9cd8+1pX0k7d0vm7Ie4w1PtNv7vt7vSn0z9R7bi3t09qa7zM2gwXcI5yL1JO5Oap9gKfCz0z3pR6/5ZX5//pWEPk35jO3e99KmXAedqcXzZzU1uR/2RXuvADldTZnAAYAAA==
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="24" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgoB1QpaHZo2DwAhEgFqWBuVJALE2CPCcQMwExGw3sgpnPAcQ8ZJhPLOCAYhAA+YWZgTQ/EeMPGEDOr8T4SYQBEdekxrcQiepBQJIB4R9k+1TRMAiokGE+PoDNDmwAFD+kpjeQeYxAzALVi80eWNzzQzGMD8NMBGgRJIwsDgAnuQrHAAYAAA==
+  </data>
+ </layer>
+</map>
