@@ -14,21 +14,18 @@ public class Game extends BasicGame {
 	private TiledMap map;
 	
 	//Instance variable for animation
-	private Animation sprite, forward, backward;
+	private Animation sprite, forward, backward, attack;
 	
 	//the coordinate for x and y
 	private float x = 125f, y = 48f;
 	
-	private boolean [][] blocked;
-	
 	private static final int SIZE = 32;
 	
+	
+	private String message;
 	//Image array for move up action
 	Image[] moveUp;
 	
-	private int tileID = map.getTileId(200, 200, 0);
-	
-
 	public Game(String title) {
 		super(title);
 	}
@@ -37,7 +34,6 @@ public class Game extends BasicGame {
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
 		map.render(0, 0);
 		sprite.draw((int)x,(int)y);
-		g.drawString(map.getTileProperty(tileID, "blocked", "false"), 200, 200);
 	}
 
 	@Override
@@ -45,26 +41,16 @@ public class Game extends BasicGame {
 		map = new TiledMap("res/GameMap.tmx");
 		Image[] moveForward = {new Image("res/MoveForward/mf1.png"), new Image("res/MoveForward/mf2.png")};
 		Image[] moveBackward = {new Image("res/MoveForward/mf4.png"), new Image("res/MoveForward/mf3.png")};
+		Image[] attackForward = {new Image("res/Attack/attack1.png"), new Image("res/Attack/attack2.png"), new Image("res/Attack/attack3.png")};
 		int[] duration = {200,200};
+		int[] attackDuration = {200, 200, 200};
 		
 		forward = new Animation(moveForward, duration,false);
 		backward = new Animation(moveBackward, duration, false);
 		sprite = new Animation(moveForward, duration,false);
+		attack = new Animation(attackForward,attackDuration,false);
 		
-		blocked = new boolean[map.getWidth()][map.getHeight()];
-		 
-	    for (int xAxis=0;xAxis<map.getWidth(); xAxis++)
-	    {
-	      for (int yAxis=0;yAxis<map.getHeight(); yAxis++)
-	      {
-	        int tileID = map.getTileId(xAxis, yAxis, 0);
-	        String value = map.getTileProperty(tileID, "blocked", "false");
-	        if ("true".equals(value))
-	        {
-	          blocked[xAxis][yAxis] = true;
-	        }
-	      }
-	    }
+		
 	}
 
 	@Override
@@ -74,20 +60,24 @@ public class Game extends BasicGame {
 		{
 			sprite = forward;
 			
-				sprite.update(delta);
-				x += delta * 0.1f;
-				checkOutOfBounds();
-			
+			sprite.update(delta);
+			x += delta * 0.1f;
+			checkOutOfBounds();
 		}
 		else if (input.isKeyDown(Input.KEY_LEFT))
 		{
 			sprite = backward;
-			
-				sprite.update(delta);
-				x -= delta * 0.1f;
-				checkOutOfBounds();
+			sprite.update(delta);
+			x -= delta * 0.1f;
+			checkOutOfBounds();
 			
 		}
+		else if (input.isKeyPressed(Input.KEY_A))
+		{
+			sprite = attack;
+			sprite.setAutoUpdate(true);
+		}
+			
 		else if(input.isKeyDown(Input.KEY_SPACE))
 		{
 			sprite = forward;
@@ -97,14 +87,9 @@ public class Game extends BasicGame {
 				y--;
 			}
 		}
+		
 	}
 	
-	private boolean isBlocked(float x, float y)
-    {
-        int xBlock = (int)x / SIZE;
-        int yBlock = (int)y / SIZE;
-        return blocked[xBlock][yBlock];
-    }
 	
 	private void checkOutOfBounds()
 	{
